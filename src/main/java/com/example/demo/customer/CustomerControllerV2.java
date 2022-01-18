@@ -6,23 +6,24 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
-@RequestMapping(path = "api/v1/customers")
+@RequestMapping(path = "api/v2/customers")
 @RestController
-@Deprecated
-public class CustomerController {
+public class CustomerControllerV2 {
 
     private final CustomerService customerService;
 
     @Autowired
-    public CustomerController(CustomerService customerService) {
+    public CustomerControllerV2(CustomerService customerService) {
         this.customerService = customerService;
     }
 
-    @GetMapping(value = "all")
-    List<Customer> getCustomers() {
-        return customerService.getCustomers();
+    @GetMapping
+    Customer getCustomers( ) {
+     return (Customer) customerService.getCustomers();
+
     }
 
     @GetMapping(path = "{customerId}")
